@@ -1,0 +1,32 @@
+# install python3
+$ sudo apt-get install python3
+
+# install linuxdvb package
+$ wget http://pypi.python.org/packages/source/l/linuxdvb/linuxdvb-0.1.tar.gz
+$ tar zxf linuxdvb-0.1.tar.gz
+$ cd linuxdvb-0.1
+$ sudo python3 setup.py install
+# If you have a trouble, just copy linuxdvb.py to nav directory.
+# $ cp linuxdvb.py ../pyucsi/nav
+
+# download pyucsi
+$ svn co https://pyucsi.svn.sourceforge.net/svnroot/pyucsi/trunk pyucsi
+
+# compile dummy_adapter
+$ cd pyucsi/dummy_adapter
+$ make
+
+# install module
+$ sudo modprobe dvb_core
+$ sudo insmod ./dvb_dummy.ko
+
+# Add ts file to ~/Videos/TS directory
+$ cp some_TS_files ~/Videos/TS
+
+# install frontends: you have to run this process when configuration of frontends is changed.
+$ rm install.db
+$ ./install.py auto
+
+# execute nav
+$ ./nav.py
+# press 's' to scan
